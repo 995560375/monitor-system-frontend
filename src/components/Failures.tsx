@@ -13,6 +13,7 @@ const Failures: React.FC = () => (
     <>
         <Divider orientation="left">Failures</Divider>
         <List
+            size="small"
             header={<div>Header</div>}
             footer={<div>Footer</div>}
             bordered
