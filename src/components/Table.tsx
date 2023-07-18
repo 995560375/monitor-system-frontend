@@ -94,22 +94,32 @@ const columns: ProColumns<TableListItem>[] = [
     },
 ];
 
-const expandedRowRender = () => {
-    const data = [];
-    for (let i = 0; i < 3; i += 1) {
+// Return the subRows that match the SubIAR.
+const generateDataBasedOnRecord = (record: TableListItem) => {
+    let data = [];
+    // A simple rule: If containers > 10, show 3 items; otherwise show 1 item
+    let numberOfItems = record.containers > 10 ? 3 : 1;
+
+    for (let i = 0; i < numberOfItems; i++) {
         data.push({
             key: i,
-            date: '2014-12-24 23:12:00',
-            name: 'This is production name',
-            upgradeNum: 'Upgraded: 56',
+            date: record.key,
+            name: `Expanded data for ${record.name}`,
+            upgradeNum: `Upgraded: ${i * 20}`,
         });
     }
+
+    return data;
+};
+
+const expandedRowRender = (record: TableListItem) => {
+    // Use 'record' to generate different data for each expanded row
+    const data = generateDataBasedOnRecord(record);
     return (
         <ProTable
             columns={[
                 { title: 'Date', dataIndex: 'date', key: 'date' },
                 { title: 'Name', dataIndex: 'name', key: 'name' },
-
                 { title: 'Upgrade Status', dataIndex: 'upgradeNum', key: 'upgradeNum' },
                 {
                     title: 'Action',
@@ -144,7 +154,7 @@ export default () => {
             pagination={{
                 showQuickJumper: true,
             }}
-            expandable={{ expandedRowRender }}
+            expandable={{ expandedRowRender: record => expandedRowRender(record) }}
             search={false}
             dateFormatter="string"
             headerTitle="嵌套表格"
