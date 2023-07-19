@@ -2,6 +2,7 @@ import { DownOutlined } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Tag } from 'antd';
+import './Table.css'
 
 export type Status = {
     color: string;
@@ -47,7 +48,7 @@ for (let i = 0; i < 5; i += 1) {
 
     tableListDataSource.push({
         key: i,
-        name: 'AppName',
+        name: 'SubIARName',
         containers: Math.floor(Math.random() * 20),
         creator: creators[Math.floor(Math.random() * creators.length)],
         // @ts-ignore
@@ -72,7 +73,7 @@ const columns: ProColumns<TableListItem>[] = [
         ),
     },
     {
-        title: '容器数量',
+        title: 'Sort',
         width: 120,
         dataIndex: 'containers',
         align: 'right',
@@ -106,6 +107,7 @@ const generateDataBasedOnRecord = (record: TableListItem) => {
             date: record.key,
             name: `Expanded data for ${record.name}`,
             upgradeNum: `Upgraded: ${i * 20}`,
+            isError: Math.random() < 0.5
         });
     }
 
@@ -117,16 +119,17 @@ const expandedRowRender = (record: TableListItem) => {
     const data = generateDataBasedOnRecord(record);
     return (
         <ProTable
+            rowClassName={(record, index) => record.isError ? "error-row" : ""}
             columns={[
                 { title: 'Date', dataIndex: 'date', key: 'date' },
                 { title: 'Name', dataIndex: 'name', key: 'name' },
-                { title: 'Upgrade Status', dataIndex: 'upgradeNum', key: 'upgradeNum' },
+                { title: 'Error Type', dataIndex: 'upgradeNum', key: 'upgradeNum' },
                 {
                     title: 'Action',
                     dataIndex: 'operation',
                     key: 'operation',
                     valueType: 'option',
-                    render: () => [<a key="Pause">Pause</a>, <a key="Stop">Stop</a>],
+                    render: () => [<a key="Pause">Copy</a>, <a key="Stop">Detail</a>],
                 },
             ]}
             headerTitle={false}
