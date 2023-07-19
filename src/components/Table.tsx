@@ -160,7 +160,7 @@ export default () => {
             expandable={{ expandedRowRender: record => expandedRowRender(record) }}
             search={false}
             dateFormatter="string"
-            headerTitle="嵌套表格"
+            headerTitle="Failures"
             options={false}
             toolBarRender={() => [
                 <Button key="show">查看日志</Button>,
