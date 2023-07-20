@@ -54,7 +54,7 @@ const Iar: React.FC = () => {
       render: (text) => <a onClick={showModal}>{text}</a>,
     },
     {
-      title: 'Age',
+      title: '111',
       dataIndex: 'age',
       key: 'age',
     },
