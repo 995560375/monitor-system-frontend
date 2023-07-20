@@ -9,6 +9,8 @@ export type Status = {
     text: string;
 };
 
+const infoText = "1111111111111111111111111"
+
 const statusMap = {
     0: {
         color: 'blue',
@@ -143,6 +145,8 @@ const expandedRowRender = (record: TableListItem) => {
 
 export default () => {
     return (
+        <>
+        <p>{infoText}</p>
         <ProTable<TableListItem>
             columns={columns}
             request={(params, sorter, filter) => {
@@ -160,7 +164,7 @@ export default () => {
             expandable={{ expandedRowRender: record => expandedRowRender(record) }}
             search={false}
             dateFormatter="string"
-            headerTitle="Failures"
+            headerTitle=""
             options={false}
             toolBarRender={() => [
                 <Button key="show">查看日志</Button>,
@@ -173,5 +177,6 @@ export default () => {
                 </Button>,
             ]}
         />
+        </>
     );
 };
