@@ -51,3 +51,12 @@ export interface BackendResponse {
     first: boolean;
     empty: boolean;
 }
+
+export interface Task {
+    AutomationStatus: string;
+    CurrentNode: string;
+    EndNode: string;
+    InterventionStatus: number;
+    TrackNumber: string;
+    User: string;
+}

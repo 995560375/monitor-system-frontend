@@ -9,7 +9,7 @@ const Failures: React.FC = () => {
     useEffect(() => {
         const fetchFailures = async () => {
             try {
-                const response = await apiService.getFailures(0, 10); // gets failures from page 0 with size 10
+                const response = await apiService.getFailures(); // gets failures from page 0 with size 10
                 const responseData: Failure[] = response.data.content;
                 setData(responseData)
                 console.log(responseData);

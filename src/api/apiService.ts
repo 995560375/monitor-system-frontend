@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
-import { BackendResponse } from './types'; // adjust the path accordingly
+import {BackendResponse, Task} from './types'; // adjust the path accordingly
 
 // Define the base URL for your API
-const API_URL = 'http://localhost:8080';
+const API_URL = 'http://localhost:5001';
 
 // Create an axios instance
 const apiInstance = axios.create({
@@ -10,13 +10,10 @@ const apiInstance = axios.create({
 });
 
 const apiService = {
-    getFailures: async (page: number, size: number): Promise<AxiosResponse<BackendResponse>> => {
-        return apiInstance.get('/failures', {
-            params: {
-                page,
-                size,
-            },
-        });
+    getAllTasks: async (): Promise<Task[]> => {
+        const response: AxiosResponse<Task[]> = await apiInstance.get('/api/tasks');
+        // console.log(response)
+        return response.data;
     },
     // Add other endpoints here...
 };
