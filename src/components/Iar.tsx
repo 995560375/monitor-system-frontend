@@ -5,6 +5,7 @@ import { Modal } from 'antd';
 import TableComponent from './Table';
 import {Task} from "@/api/types";
 import apiService from "@/api/apiService";
+import './Table.css'
 
 // interface DataType {
 //   key: string;
@@ -52,8 +53,8 @@ const Iar: React.FC = () => {
             key: task.TrackNumber,
           }));
           setTasks(tasksWithKeys);
-          // console.log(fetchedTasks)
-          // console.log(tasks)
+          console.log(tasksWithKeys)
+
         })
         .catch(error => {
           console.error('An error occurred while fetching tasks:', error);
@@ -134,7 +135,11 @@ const Iar: React.FC = () => {
 
   return (
       <div>
-        <Table columns={columnsWithModal} dataSource={tasks} />
+        <Table
+            columns={columnsWithModal}
+            dataSource={tasks}
+            rowClassName={(record, index) => record.isFailure ? "error-row" : ""}
+        />
         <Modal title="Details" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} width="80%">
           <TableComponent />
         </Modal>

@@ -59,4 +59,5 @@ export interface Task {
     InterventionStatus: number;
     TrackNumber: string;
     User: string;
+    isFailure: boolean;
 }
